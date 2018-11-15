@@ -14,6 +14,9 @@ const UserNav = props => {
               Logout
             </a>
           </li>
+          <li>
+            <Link to="/articles/new">Post</Link>
+          </li>
         </ul>
       ) : (
         <ul>
