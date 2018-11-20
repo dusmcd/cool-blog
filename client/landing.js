@@ -16,7 +16,7 @@ const Landing = () => {
           </Link>
         </Button>
       </div>
-      <Container>
+      <Container className="list-container">
         <ArticleList />
       </Container>
     </div>

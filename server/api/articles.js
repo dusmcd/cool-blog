@@ -1,9 +1,17 @@
 const router = require('express').Router()
 const { Article } = require('../db/models')
 
+// gets all the articles from the db
 router.get('/', (req, res, next) => {
   return Article.findAll()
     .then(articles => res.json(articles))
+    .catch(err => next(err))
+})
+
+// gets the single article associated with the given id
+router.get('/:id', (req, res, next) => {
+  return Article.findById(req.params.id)
+    .then(article => res.json(article))
     .catch(err => next(err))
 })
 
