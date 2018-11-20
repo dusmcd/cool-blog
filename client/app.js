@@ -4,7 +4,7 @@ import UserNav from './user-nav'
 
 const App = () => {
   return (
-    <div>
+    <div id="main-content">
       <UserNav />
       <Routes />
     </div>

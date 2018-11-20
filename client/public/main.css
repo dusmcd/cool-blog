@@ -1,4 +1,28 @@
+/*global styles */
+
 body,
-html {
+html,
+#main-content,
+#app {
   height: 100%;
 }
+
+.links {
+  color: white;
+}
+
+/*global styled END*/
+
+/*LANDING PAGE*/
+
+.landing-banner {
+  text-align: center;
+  background-image: url('https://images.pexels.com/photos/259526/pexels-photo-259526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 40%;
+}
+
+/*LANDING PAGE END*/

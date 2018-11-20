@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Landing from './landing'
-import { SignUp, Login } from './components'
+import { SignUp, Login, About, NewArticle } from './components'
 import { connect } from 'react-redux'
 import { getUserThunk } from './store'
 
@@ -15,11 +15,15 @@ class Routes extends React.Component {
     }
   }
   render() {
+    const isLoggedIn = !!this.props.user.id
     return (
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/about" component={About} />
+
+        {isLoggedIn && <Route path="/articles/new" component={NewArticle} />}
       </Switch>
     )
   }
