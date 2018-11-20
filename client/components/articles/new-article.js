@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Container, Button, Input } from 'semantic-ui-react'
-import { createArticleThunk } from '../store'
+import { createArticleThunk } from '../../store'
 import { connect } from 'react-redux'
 
 class NewArticle extends React.Component {
