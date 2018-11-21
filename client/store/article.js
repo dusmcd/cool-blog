@@ -34,7 +34,8 @@ export const createArticleThunk = newArticle => {
     return axios
       .post('/api/articles', newArticle)
       .then(res => {
-        return dispatch(selectArticleAction(res.data))
+        dispatch(selectArticleAction(res.data))
+        return res.data
       })
       .catch(err => console.error(err.message))
   }

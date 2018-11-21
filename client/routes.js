@@ -22,9 +22,8 @@ class Routes extends React.Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
-        <Route path="/articles/:id" component={Article} />
-
         {isLoggedIn && <Route path="/articles/new" component={NewArticle} />}
+        <Route path="/articles/view/:id" component={Article} />
       </Switch>
     )
   }

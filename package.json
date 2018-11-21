@@ -7,7 +7,8 @@
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\"",
     "start-dev": "npm run start-server & webpack -w",
     "start-client": "webpack -w",
-    "start-server": "nodemon server/server.js -e html,js,scss --ignore public --ignore client"
+    "start-server": "nodemon server/server.js -e html,js,scss --ignore public --ignore client",
+    "seed": "node bin/seed.js"
   },
   "author": "",
   "license": "ISC",

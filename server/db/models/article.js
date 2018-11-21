@@ -3,14 +3,14 @@ const db = require('../db')
 
 const Article = db.define('article', {
   title: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -29,4 +29,7 @@ Article.beforeValidate(article => {
   article.slug = article.title.replace(/\s+/g, '-')
 })
 
+Article.beforeCreate(article => {
+  article.content = article.content.replace(/\n/g, '<br />')
+})
 module.exports = Article

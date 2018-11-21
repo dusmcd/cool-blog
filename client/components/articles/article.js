@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
+import { Container, Segment } from 'semantic-ui-react'
 import { getOneArticleThunk } from '../../store'
 import { connect } from 'react-redux'
 
@@ -12,10 +12,18 @@ class Article extends React.Component {
 
   render() {
     const { currentArticle } = this.props
+    if (!currentArticle.content) return <div>LOADING...</div>
     return (
       <Container>
-        <h2>{currentArticle.title}</h2>
-        <p>{currentArticle.content}</p>
+        <Segment raised>
+          <h2>{currentArticle.title}</h2>
+        </Segment>
+        <Segment raised>
+          {currentArticle.content.split('<br />').map((pgraph, i) => {
+            const key = i * 5
+            return <p key={key}>{pgraph}</p>
+          })}
+        </Segment>
       </Container>
     )
   }
