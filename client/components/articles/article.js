@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Segment } from 'semantic-ui-react'
 import { getOneArticleThunk } from '../../store'
 import { connect } from 'react-redux'
+import CommentWrite from './comment-write'
 
 class Article extends React.Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class Article extends React.Component {
             return <p key={key}>{pgraph}</p>
           })}
         </Segment>
+        <CommentWrite />
       </Container>
     )
   }
