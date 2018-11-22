@@ -3,14 +3,14 @@ const db = require('../db')
 
 const Article = db.define('article', {
   title: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,

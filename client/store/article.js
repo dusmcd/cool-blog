@@ -4,16 +4,16 @@ import axios from 'axios'
   CONSTANTS
 */
 
-const CREATE_ARTICLE = 'CREATE_ARTICLE'
+const SELECT_ARTICLE = 'SELECT_ARTICLE'
 const GET_ARTICLES = 'GET_ARTICLES'
 
 /*
   ACTION CREATORS
 */
 
-const createArticleAction = article => {
+const selectArticleAction = article => {
   return {
-    type: CREATE_ARTICLE,
+    type: SELECT_ARTICLE,
     article,
   }
 }
@@ -34,7 +34,8 @@ export const createArticleThunk = newArticle => {
     return axios
       .post('/api/articles', newArticle)
       .then(res => {
-        return dispatch(createArticleAction(res.data))
+        dispatch(selectArticleAction(res.data))
+        return res.data
       })
       .catch(err => console.error(err.message))
   }
@@ -45,6 +46,15 @@ export const getArticlesThunk = () => {
     return axios
       .get('/api/articles')
       .then(res => dispatch(getArticlesAction(res.data)))
+      .catch(err => console.error(err.message))
+  }
+}
+
+export const getOneArticleThunk = id => {
+  return dispatch => {
+    return axios
+      .get(`/api/articles/${id}`)
+      .then(res => dispatch(selectArticleAction(res.data)))
       .catch(err => console.error(err.message))
   }
 }
@@ -60,7 +70,7 @@ const articleState = {
 
 export default function reducer(state = articleState, action) {
   switch (action.type) {
-    case CREATE_ARTICLE:
+    case SELECT_ARTICLE:
       return { ...state, currentArticle: action.article }
     case GET_ARTICLES:
       return { ...state, articleList: action.articles }

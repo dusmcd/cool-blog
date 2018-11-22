@@ -7,6 +7,10 @@ html,
   height: 100%;
 }
 
+body {
+  background-color: rgb(245, 245, 245);
+}
+
 .links {
   color: white;
 }
@@ -23,6 +27,14 @@ html,
   background-position: center;
   color: white;
   height: 40%;
+}
+
+.landing-banner button {
+  margin-bottom: 16px !important;
+}
+
+.list-container {
+  margin-top: 32px;
 }
 
 /*LANDING PAGE END*/
