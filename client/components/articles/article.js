@@ -19,7 +19,7 @@ class Article extends React.Component {
           <h2>{currentArticle.title}</h2>
         </Segment>
         <Segment raised>
-          {currentArticle.content.split('<br />').map((pgraph, i) => {
+          {currentArticle.content.split('\n').map((pgraph, i) => {
             const key = i * 5
             return <p key={key}>{pgraph}</p>
           })}

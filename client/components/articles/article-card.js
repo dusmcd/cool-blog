@@ -12,14 +12,14 @@ const ArticleLink = props => {
 
 const ArticleCard = props => {
   const { article } = props
-  const cleanContent = article.content.replace(/<br \/>/g, ' ')
+  if (!article.content) return <div>LOADING...</div>
   return (
     <Segment raised>
       <ArticleLink id={article.id} slug={article.slug}>
         <h3>{article.title}</h3>
       </ArticleLink>
       <p>
-        {cleanContent.substring(0, 100)} ...
+        {article.content.substring(0, 100)} ...
         <ArticleLink id={article.id} slug={article.slug}>
           <span>see more</span>
         </ArticleLink>

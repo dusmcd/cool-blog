@@ -29,7 +29,4 @@ Article.beforeValidate(article => {
   article.slug = article.title.replace(/\s+/g, '-')
 })
 
-Article.beforeCreate(article => {
-  article.content = article.content.replace(/\n/g, '<br />')
-})
 module.exports = Article
