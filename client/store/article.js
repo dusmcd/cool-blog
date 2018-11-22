@@ -71,8 +71,11 @@ export const addCommentThunk = (comment, articleId) => {
   return dispatch => {
     return axios
       .post(`/api/articles/${articleId}/comment`, comment)
-      .then(res => dispatch(addCommentAction(res.data)))
-      .catch(err => console.error(err.message))
+      .then(res => {
+        dispatch(addCommentAction(res.data))
+        return res.data
+      })
+      .catch(err => console.error(err))
   }
 }
 

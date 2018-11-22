@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
+import { addCommentThunk } from '../../store'
 
 class CommentWrite extends React.Component {
   constructor() {
@@ -11,7 +12,14 @@ class CommentWrite extends React.Component {
     }
   }
   handleChange = (e, data) => {
-    // handle change
+    this.setState({ content: data.value })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props
+      .addComment(this.state, this.props.articleId)
+      .then(() => this.setState({ newComment: false }))
   }
 
   clickListener = () => {
@@ -20,8 +28,12 @@ class CommentWrite extends React.Component {
 
   render() {
     return this.state.newComment ? (
-      <Form>
-        <Form.TextArea placeholder="Write comment here" name="content" />
+      <Form onSubmit={this.handleSubmit}>
+        <Form.TextArea
+          placeholder="Write comment here"
+          name="content"
+          onChange={this.handleChange}
+        />
         <Button color="green" type="submit">
           Save
         </Button>
@@ -34,4 +46,14 @@ class CommentWrite extends React.Component {
   }
 }
 
-export default CommentWrite
+const mapDispatch = dispatch => {
+  return {
+    addComment: (comment, articleId) =>
+      dispatch(addCommentThunk(comment, articleId)),
+  }
+}
+
+export default connect(
+  null,
+  mapDispatch
+)(CommentWrite)

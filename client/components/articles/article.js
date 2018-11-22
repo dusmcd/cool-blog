@@ -3,6 +3,7 @@ import { Container, Segment } from 'semantic-ui-react'
 import { getOneArticleThunk } from '../../store'
 import { connect } from 'react-redux'
 import CommentWrite from './comment-write'
+import CommentRead from './comment-read'
 
 class Article extends React.Component {
   componentDidMount() {
@@ -11,9 +12,21 @@ class Article extends React.Component {
     this.props.getArticle(articleId)
   }
 
+  componentDidUpdate(prevProps) {
+    const prevArticle = prevProps.currentArticle
+    const { currentArticle } = this.props
+    if (!currentArticle.comments || !prevArticle.comments) return
+    if (prevArticle.comments.length !== currentArticle.comments.length) {
+      const articleId = this.props.match.params.id
+      this.props.getArticle(articleId)
+    }
+  }
+
   render() {
     const { currentArticle } = this.props
-    if (!currentArticle.content) return <div>LOADING...</div>
+    if (!currentArticle.content || !currentArticle.comments) {
+      return <div>LOADING...</div>
+    }
     return (
       <Container>
         <Segment raised>
@@ -25,7 +38,15 @@ class Article extends React.Component {
             return <p key={key}>{pgraph}</p>
           })}
         </Segment>
-        <CommentWrite />
+        {currentArticle.comments.length ? (
+          <Segment>
+            {currentArticle.comments.map(comment => {
+              return <CommentRead key={comment.id} comment={comment} />
+            })}
+          </Segment>
+        ) : null}
+
+        <CommentWrite articleId={currentArticle.id} />
       </Container>
     )
   }
