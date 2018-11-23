@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const SELECT_ARTICLE = 'SELECT_ARTICLE'
 const GET_ARTICLES = 'GET_ARTICLES'
+const ADD_COMMENT = 'ADD_COMMENT'
 
 /*
   ACTION CREATORS
@@ -22,6 +23,13 @@ const getArticlesAction = articles => {
   return {
     type: GET_ARTICLES,
     articles,
+  }
+}
+
+const addCommentAction = comment => {
+  return {
+    type: ADD_COMMENT,
+    comment,
   }
 }
 
@@ -59,6 +67,18 @@ export const getOneArticleThunk = id => {
   }
 }
 
+export const addCommentThunk = (comment, articleId) => {
+  return dispatch => {
+    return axios
+      .post(`/api/articles/${articleId}/comment`, comment)
+      .then(res => {
+        dispatch(addCommentAction(res.data))
+        return res.data
+      })
+      .catch(err => console.error(err))
+  }
+}
+
 /*
   REDUCER AND STATE OBJECT
 */
@@ -74,6 +94,13 @@ export default function reducer(state = articleState, action) {
       return { ...state, currentArticle: action.article }
     case GET_ARTICLES:
       return { ...state, articleList: action.articles }
+    case ADD_COMMENT:
+      const updatedComments = [...state.currentArticle.comments, action.comment]
+      const updatedArticle = {
+        ...state.currentArticle,
+        comments: updatedComments,
+      }
+      return { ...state, currentArticle: updatedArticle }
     default:
       return state
   }
