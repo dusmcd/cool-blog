@@ -40,7 +40,7 @@ const addCommentAction = comment => {
 export const createArticleThunk = newArticle => {
   return dispatch => {
     return axios
-      .post('/api/articles', newArticle)
+      .post('/api/admin/articles', newArticle)
       .then(res => {
         dispatch(selectArticleAction(res.data))
         return res.data

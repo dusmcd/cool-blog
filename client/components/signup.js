@@ -10,6 +10,7 @@ class SignUp extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
+      username: '',
       email: '',
       password: '',
     }
@@ -39,6 +40,13 @@ class SignUp extends React.Component {
           label="Last Name"
           name="lastName"
           value={this.state.lastName}
+        />
+        <Input
+          type="text"
+          placeholder="Username"
+          label="Username"
+          value={this.state.username}
+          name="username"
         />
         <Input type="text" placeholder="Email" label="Email" name="email" />
         <Input

@@ -20,18 +20,7 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.post('/', (req, res, next) => {
-  // extract relevant fields
-  const newArticle = {
-    title: req.body.title,
-    content: req.body.content,
-  }
-  return Article.create(newArticle)
-    .then(article => res.json(article))
-    .catch(err => next(err))
-})
-
-router.post('/:id/comment', (req, res, next) => {
+router.post('/:id/comment', isLoggedIn, (req, res, next) => {
   Article.findById(req.params.id)
     .then(article => {
       return Comment.create({
@@ -45,5 +34,12 @@ router.post('/:id/comment', (req, res, next) => {
     })
     .catch(err => next(err))
 })
+
+function isLoggedIn(req, res, next) {
+  if (req.user) {
+    return next()
+  }
+  return res.status(401).send('Unauthorized')
+}
 
 module.exports = router
