@@ -38,3 +38,14 @@ body {
 }
 
 /*LANDING PAGE END*/
+
+/*SIGN UP PAGE styles*/
+.required-message {
+  color: red;
+}
+
+.required-error {
+  border: 1px solid red;
+}
+
+/*SIGN UP PAGE END*/
