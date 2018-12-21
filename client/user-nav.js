@@ -5,6 +5,7 @@ import { logoutUserThunk } from './store'
 
 const UserNav = props => {
   const isLoggedIn = props.currentUser
+  const isAdmin = props.currentUser.admin
   return (
     <div>
       {isLoggedIn ? (
@@ -14,9 +15,11 @@ const UserNav = props => {
               Logout
             </a>
           </li>
-          <li>
-            <Link to="/articles/new">Post</Link>
-          </li>
+          {isAdmin && (
+            <li>
+              <Link to="/articles/new">Post</Link>
+            </li>
+          )}
         </ul>
       ) : (
         <ul>

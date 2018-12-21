@@ -23,7 +23,8 @@ class Article extends React.Component {
   }
 
   render() {
-    const { currentArticle } = this.props
+    const { currentArticle, currentUser } = this.props
+    const isLoggedIn = !!currentUser.id
     if (!currentArticle.content || !currentArticle.comments) {
       return <div>LOADING...</div>
     }
@@ -46,7 +47,7 @@ class Article extends React.Component {
           </Segment>
         ) : null}
 
-        <CommentWrite articleId={currentArticle.id} />
+        {isLoggedIn && <CommentWrite articleId={currentArticle.id} />}
       </Container>
     )
   }
@@ -55,6 +56,7 @@ class Article extends React.Component {
 const mapState = state => {
   return {
     currentArticle: state.article.currentArticle,
+    currentUser: state.user.user,
   }
 }
 
