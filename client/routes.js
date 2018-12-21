@@ -8,6 +8,7 @@ import {
   NewArticle,
   Article,
   NotFound,
+  AdminDashboard,
 } from './components'
 import { connect } from 'react-redux'
 import { getUserThunk } from './store'
@@ -31,6 +32,7 @@ class Routes extends React.Component {
         <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
         {isAdmin && <Route path="/articles/new" component={NewArticle} />}
+        {isAdmin && <Route path="/admin" component={AdminDashboard} />}
         <Route path="/articles/view/:id" component={Article} />
         <Route path="/" component={NotFound} />
       </Switch>

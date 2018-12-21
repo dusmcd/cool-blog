@@ -20,6 +20,11 @@ const UserNav = props => {
               <Link to="/articles/new">Post</Link>
             </li>
           )}
+          {isAdmin && (
+            <li>
+              <Link to="/admin">Admin Dashboard</Link>
+            </li>
+          )}
         </ul>
       ) : (
         <ul>
